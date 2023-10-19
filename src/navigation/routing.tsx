@@ -5,7 +5,10 @@ import Resume from '../pages/resume.tsx'
 import Experience from '../pages/experience.tsx'
 import Interests from '../pages/interests.tsx'
 import Contact from '../pages/contact.tsx'
-import PageNotFound from '../pages/PageNotFound.tsx'
+
+
+import PageNotFound from '../pages/pageNotFound.tsx'
+
 
 interface RoutingProps {
 
@@ -13,6 +16,8 @@ interface RoutingProps {
 
 const Routing: FunctionComponent<RoutingProps> = () => {
     return (
+        <div>
+
         <Routes>
             <Route path={'/'} element={<Home/>}/>
             <Route path={'/resume'} element={<Resume/>}/>
@@ -21,6 +26,7 @@ const Routing: FunctionComponent<RoutingProps> = () => {
             <Route path={'/contact'} element={<Contact/>}/>
             <Route path={'*'} element={<PageNotFound/>}/>
         </Routes>
+        </div>
     )
 }
 

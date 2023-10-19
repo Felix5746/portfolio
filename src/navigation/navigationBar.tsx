@@ -1,4 +1,4 @@
-import {FunctionComponent} from 'react'
+import {FunctionComponent, useContext} from 'react'
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,11 +12,15 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+
 import {NavLink} from 'react-router-dom'
+import {DarkMode} from '../context/darkMode.tsx'
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
 
 const pages = [
-    {Name:'Home',Link:'/'},
+
     {Name:'Resume',Link:'/resume'},
     {Name:'Experience',Link:'/experience'},
     {Name:'Interests',Link:'/interests'},
@@ -32,6 +36,8 @@ interface NavigationBarProps {
 const NavigationBar: FunctionComponent<NavigationBarProps> = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const {dark, toggleTheme} = useContext(DarkMode)
+
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -47,29 +53,46 @@ const NavigationBar: FunctionComponent<NavigationBarProps> = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    const background = !dark? 'bannerCrop': 'space'
+
+    const customNavLinkStyle = {
+        textDecoration: 'none', /* Remove underline */
+        color: 'inherit', /* Inherit the text color */
+    };
+
+    const customNavbar = {
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("src/assets/images/${background}.jpg")`, // Replace with the actual path to your image
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        height: '10rem',
+        marginBottom: '2rem',
+
+    };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" style={customNavbar}>
             <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                <Toolbar disableGutters >
+                    <NavLink to={'/'} style={customNavLinkStyle}>
                     <Typography
                         variant="h6"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
+
                         sx={{
-                            mr: 2,
+                           mr:3,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
+                            fontFamily: 'inherit',
+                            fontWeight: 600,
+                            fontSize:30,
+                            letterSpacing: 'inherit',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Felix Bastijns
                     </Typography>
+                    </NavLink>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -101,52 +124,55 @@ const NavigationBar: FunctionComponent<NavigationBarProps> = () => {
                             }}
                         >
                             {pages.map((page) => (
+                                <MenuItem key={page.Name} onClick={handleCloseNavMenu}>
 
-                                <NavLink to={page.Link} key={page.Name}>
-                                <MenuItem key={page.Name}>
-                                    <Typography textAlign="center">{page.Name}</Typography>
+                                    <Typography textAlign="center">
+                                        <NavLink to={page.Link}  style={customNavLinkStyle}>
+                                            {page.Name}
+                                        </NavLink>
+                                        </Typography>
+
                                 </MenuItem>
-                                </NavLink>
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
                     <Typography
                         variant="h5"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
+                        href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
+                            fontFamily: 'inherit',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Felix Bastijns
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
-                            <NavLink to={page.Link} key={page.Name}>
                             <Button
                                 key={page.Name}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
+                                <NavLink to={page.Link}  style={customNavLinkStyle}>
                                 {page.Name}
+                                </NavLink>
                             </Button>
-                            </NavLink>
                         ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar  />
+                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -171,6 +197,9 @@ const NavigationBar: FunctionComponent<NavigationBarProps> = () => {
                                 </MenuItem>
                             ))}
                         </Menu>
+                        <IconButton sx={{ ml: 1 }} onClick={toggleTheme} color="inherit">
+                            { dark ? <Brightness7Icon /> : <Brightness4Icon />}
+                        </IconButton>
                     </Box>
                 </Toolbar>
             </Container>
