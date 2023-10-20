@@ -4,7 +4,7 @@ import Home from '../pages/home.tsx'
 import Resume from '../pages/resume.tsx'
 import Experience from '../pages/experience.tsx'
 import Interests from '../pages/interests.tsx'
-import Contact from '../pages/contact.tsx'
+import Contact from '../pages/contact/contact.tsx'
 
 
 import PageNotFound from '../pages/pageNotFound.tsx'

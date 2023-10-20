@@ -34,6 +34,7 @@ const App: FunctionComponent<AppProps> = () => {
                         <CssBaseline/>
                             <BrowserRouter>
                                 <NavigationBar/>
+
                                 <Routing/>
                                 <Footer/>
                             </BrowserRouter>

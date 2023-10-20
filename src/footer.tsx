@@ -22,7 +22,7 @@ function Copyright() {
              <Link color="inherit" href="/interests">
                 Interests
             </Link>{' - '}
-            <Link color="inherit" href="/contact">
+            <Link color="inherit" href="/contact/contact">
                 Contact
             </Link>
 

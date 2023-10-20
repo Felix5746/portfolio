@@ -77,7 +77,7 @@ const NavigationBar: FunctionComponent<NavigationBarProps> = () => {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
+
 
                         sx={{
                            mr:3,
