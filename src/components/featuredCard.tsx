@@ -1,21 +1,23 @@
 import {FunctionComponent} from 'react'
-import {Card, CardActions, CardContent, CardMedia} from '@mui/material'
+import {Card, CardActions, CardContent, CardMedia, Grid} from '@mui/material'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import {NavLink} from 'react-router-dom'
 
 interface FeaturedCardProps {
-    image: string,
-    title: string,
+    image: string
+    title: string
     content: string
     buttonTitle: string
+    link: string
 }
 
-const FeaturedCard: FunctionComponent<FeaturedCardProps> = ({image, title, content, buttonTitle}) => {
+const FeaturedCard: FunctionComponent<FeaturedCardProps> = ({link, image, title, content, buttonTitle}) => {
     return (
-        <>
-            <Card sx={{ maxWidth: 345 }}>
+        <Grid item xs={10} md={4} lg={4}>
+            <Card>
                 <CardMedia
-                    sx={{ height: 200 }}
+                    sx={{ height: 300 }}
                     image={image}
                     title={title}
                 />
@@ -28,11 +30,12 @@ const FeaturedCard: FunctionComponent<FeaturedCardProps> = ({image, title, conte
                     </Typography>
                 </CardContent>
                 <CardActions>
-
-                    <Button size="large">{buttonTitle}</Button>
+                    <NavLink to={link}>
+                        <Button size="large">{buttonTitle}</Button>
+                    </NavLink>
                 </CardActions>
             </Card>
-        </>
+        </Grid>
     )
 }
 

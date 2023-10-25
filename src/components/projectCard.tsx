@@ -12,9 +12,10 @@ interface ProjectCardProps {
     buttonTitle: string
     setItem: (id: number) => void
     active: boolean
+    isLargeScreen:boolean
 }
 
-const ProjectCard: FunctionComponent<ProjectCardProps> = ({active, image, id, title, content, buttonTitle, setItem}) => {
+const ProjectCard: FunctionComponent<ProjectCardProps> = ({isLargeScreen, active, image, id, title, content, buttonTitle, setItem}) => {
 
     return (
         <>
@@ -37,7 +38,8 @@ const ProjectCard: FunctionComponent<ProjectCardProps> = ({active, image, id, ti
 
                     <CardActions>
                         {active && <Link target={'_blank'} to={'https://github.com/Felix5746'}><Button size="medium">{buttonTitle}</Button></Link>}
-                        {!active && <Button size="medium">{buttonTitle}</Button>}
+                        {!active && isLargeScreen && <Button size="medium" disabled={true}>{buttonTitle}</Button>}
+                        {!active && !isLargeScreen && <Link target={'_blank'} to={'https://github.com/Felix5746'}><Button size="medium">{buttonTitle}</Button></Link>}
                     </CardActions>
 
 

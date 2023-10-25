@@ -13,14 +13,8 @@ function Copyright() {
             <Link color="inherit" href="/">
                 Home
             </Link>{' - '}
-             <Link color="inherit" href="/resume">
-                Resume
-            </Link>{' - '}
              <Link color="inherit" href="/experience">
                 Experience
-            </Link>{' - '}
-             <Link color="inherit" href="/interests">
-                Interests
             </Link>{' - '}
             <Link color="inherit" href="/contact/contact">
                 Contact

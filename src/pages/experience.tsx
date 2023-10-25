@@ -1,4 +1,4 @@
-import {FunctionComponent, useState} from 'react'
+import {FunctionComponent, useEffect, useState} from 'react'
 import Box from '@mui/material/Box'
 import {Grid} from '@mui/material'
 import Container from '@mui/material/Container'
@@ -34,13 +34,30 @@ const cardData = [
 ];
 const Experience: FunctionComponent<ExperienceProps> = () => {
     const [currentItem, setCurrentItem] = useState<number>(1);
+    const [isLargeScreen, setIsLargeScreen] = useState<boolean>(true);
 
-    const changeSelection = (id:number) => {
-        setCurrentItem(id)
+    const changeSelection = (id: number) => {
+        setCurrentItem(id);
+    };
 
-    }
+    useEffect(() => {
+        // Check the screen size when the component mounts and whenever it resizes
+        const handleResize = () => {
+            if (window.innerWidth < 1280) {
+                setIsLargeScreen(false);
+            } else {
+                setIsLargeScreen(true);
+            }
+        };
 
+        handleResize(); // Check the screen size when the component mounts
 
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     return (
         <div>
             <Container maxWidth={'lg'}>
@@ -57,6 +74,7 @@ const Experience: FunctionComponent<ExperienceProps> = () => {
                                         setItem={changeSelection}
                                         id={card.id}
                                         active={card.id === currentItem}
+                                        isLargeScreen={isLargeScreen}
                                     />
                                 </div>
                             </Grid>
